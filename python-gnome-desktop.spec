@@ -25,7 +25,7 @@ BuildRequires:	gtksourceview-devel >= 1.2.0
 BuildRequires:	hal-devel
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
-BuildRequires:	libgtop-devel >= 2.10.1
+BuildRequires:	libgtop-devel >= 2.13.0
 BuildRequires:	librsvg-devel >= 1:2.9.5-2
 BuildRequires:	libtool
 BuildRequires:	libwnck-devel >= 2.10.0

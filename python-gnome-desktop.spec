@@ -52,11 +52,10 @@ Wi±zania Pythona do bibliotek GNOME.
 Summary:	Development files for GNOME bindings for Python
 Summary(pl):	Pliki programistyczne wi±zañ Pythona do GNOME
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-devel < 2.13.3
 Requires:	%{name}-applet = %{version}-%{release}
-Requires:	%{name}-gtkhtml = %{version}-%{release}
 Requires:	%{name}-nautilus-cd-burner = %{version}-%{release}
 Requires:	%{name}-print = %{version}-%{release}
-Requires:	%{name}-egg = %{version}-%{release}
 Requires:	%{name}-libwnck = %{version}-%{release}
 Requires:	python-pygtk-devel >= %{pygtk_req}
 

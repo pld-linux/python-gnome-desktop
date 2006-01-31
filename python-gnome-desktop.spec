@@ -86,6 +86,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
 Obsoletes:	python-gnome-applet
+Obsoletes:	python-gnome-extras-applet
 Provides:	python-gnome-applet
 
 %description applet
@@ -98,6 +99,7 @@ Wi您ania Pythona do biblioteki GNOME Applet.
 Summary:	Gtksourceview bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki gtksourceview
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-gtksourceview
 Requires:	%{name}-print = %{version}-%{release}
 
 %description gtksourceview
@@ -110,6 +112,7 @@ Wi您ania Pythona do biblioteki gtksourceview.
 Summary:	Libgtop bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki libgtop
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-libgtop
 Requires:	python-pygtk-gobject >= %{pygtk_req}
 
 %description libgtop
@@ -122,6 +125,7 @@ Wi您ania Pythona do biblioteki libgtop.
 Summary:	Libwnck bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki libwnck
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-libwnck
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 
 %description libwnck
@@ -134,6 +138,7 @@ Wi您ania Pythona do biblioteki libwnck.
 Summary:	gnome-media-profiles bindings for Python
 Summary(pl):	Wi您ania Pythona do gnome-media-profiles
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-mediaprofiles
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
 
@@ -160,6 +165,7 @@ Wi您ania Pythona do Metacity.
 Summary:	Nautilus-cd-burner bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki nautilus-cd-burner
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-nautilus-cd-burner
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 
 %description nautilus-cd-burner
@@ -174,6 +180,7 @@ Summary(pl):	Wi您ania Pythona do biblioteki GNOME obs逝gi drukowania
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-canvas >= %{gnome_python_req}
+Obsoletes:	python-gnome-extras-print
 Obsoletes:	python-gnome-print
 Obsoletes:	python-gnome-print-ui
 Provides:	python-gnome-print
@@ -189,6 +196,7 @@ Wi您ania Pythona do biblioteki GNOME obs逝gi drukowania.
 Summary:	Totem bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki totem
 Group:		Libraries/Python
+Obsoletes:	python-gnome-extras-totem
 Requires:	python-gnome-vfs >= %{gnome_python_req}
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 

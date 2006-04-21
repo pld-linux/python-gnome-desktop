@@ -56,8 +56,8 @@ Requires:	%{name}-applet = %{version}-%{release}
 Requires:	%{name}-nautilus-cd-burner = %{version}-%{release}
 Requires:	%{name}-print = %{version}-%{release}
 Requires:	%{name}-libwnck = %{version}-%{release}
+Requires:	python-gnome-devel >= %{gnome_python_req}
 Requires:	python-pygtk-devel >= %{pygtk_req}
-Requires: python-gnome-devel >= %{gnome_python_req}
 Obsoletes:	python-gnome-extras-devel < 2.13.3
 
 %description devel

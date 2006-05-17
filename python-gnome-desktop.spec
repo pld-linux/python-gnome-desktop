@@ -36,7 +36,7 @@ BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
-%{?with_totem:BuildRequires:	totem-devel >= 0.101}
+%{?with_totem:BuildRequires:	totem-devel >= 1.4.0}
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

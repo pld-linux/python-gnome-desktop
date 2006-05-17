@@ -14,23 +14,23 @@ License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.14/%{module}-%{version}.tar.bz2
 # Source0-md5:	d3f9c2d213b7d486ca7bd87dd106ca69
-BuildRequires:	GConf2-devel >= 2.10.0
+BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	gnome-media-devel >= 2.10.0
-BuildRequires:	gnome-panel-devel >= 2.10.1
-BuildRequires:	gnome-vfs2-devel >= 2.10.1
+BuildRequires:	gnome-media-devel >= 2.14.0
+BuildRequires:	gnome-panel-devel >= 2.14.0
+BuildRequires:	gnome-vfs2-devel >= 2.14.0
 BuildRequires:	gtk+2-devel >= 2:2.6.4
 BuildRequires:	gtksourceview-devel >= 1.2.0
 BuildRequires:	hal-devel
-BuildRequires:	libgnomeprintui-devel >= 2.10.2
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
-BuildRequires:	libgtop-devel >= 2.13.0
+BuildRequires:	libgnomeprintui-devel >= 2.12.0
+BuildRequires:	libgnomeui-devel >= 2.14.0
+BuildRequires:	libgtop-devel >= 2.14.0
 BuildRequires:	librsvg-devel >= 1:2.9.5-2
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.10.0
+BuildRequires:	libwnck-devel >= 2.14.0
 BuildRequires:	metacity-devel
-BuildRequires:	nautilus-cd-burner-devel >= 2.11.1
+BuildRequires:	nautilus-cd-burner-devel >= 2.14.0
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2

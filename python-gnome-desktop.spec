@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
-%define		pygtk_req		2:2.9.0
-%define		gnome_python_req	2.15.1
+%define		pygtk_req		2:2.9.2
+%define		gnome_python_req	2.15.2
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,19 +8,19 @@
 Summary:	GNOME bindings for Python
 Summary(pl):	Wi您ania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.15.2
-Release:	1
+Version:	2.15.3
+Release:	2
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.15/%{module}-%{version}.tar.bz2
-# Source0-md5:	e4fa976f2bff29e8333a5ff581673bfe
+# Source0-md5:	02274896fb2e1bd9ca57989fc02832d0
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	gnome-media-devel >= 2.14.2
 BuildRequires:	gnome-panel-devel >= 2.14.2
-BuildRequires:	gnome-vfs2-devel >= 2.15.1
-BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	gnome-vfs2-devel >= 2.15.2
+BuildRequires:	gtk+2-devel >= 2:2.9.3
 BuildRequires:	gtksourceview-devel >= 1.6.1
 BuildRequires:	hal-devel >= 0.5.7
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
@@ -28,15 +28,15 @@ BuildRequires:	libgnomeui-devel >= 2.15.1
 BuildRequires:	libgtop-devel >= 2.14.0
 BuildRequires:	librsvg-devel >= 1:2.15.0
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.14.2
-BuildRequires:	metacity-devel >= 2.15.3
-BuildRequires:	nautilus-cd-burner-devel >= 2.15.2
+BuildRequires:	libwnck-devel >= 2.15.3
+BuildRequires:	metacity-devel >= 2.15.5
+BuildRequires:	nautilus-cd-burner-devel >= 2.15.3
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
-%{?with_totem:BuildRequires:	totem-devel >= 1.5.1}
+%{?with_totem:BuildRequires:	totem-devel >= 1.5.2}
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -107,6 +107,18 @@ Gtksourceview bindings for Python.
 
 %description gtksourceview -l pl
 Wi您ania Pythona do biblioteki gtksourceview.
+
+%package keyring
+Summary:	GNOME keyring bindings for Python
+Summary(pl):	Wi您ania Pythona do biblioteki GNOME keyring
+Group:		Libraries/Python
+Requires:	python-pygobject >= 2.10.0
+
+%description keyring
+GNOME keyring bindings for Python.
+
+%description keyring -l pl
+Wi您ania Pythona do biblioteki GNOME keyring.
 
 %package libgtop
 Summary:	Libgtop bindings for Python
@@ -220,6 +232,7 @@ Wi您ania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
+#%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -270,6 +283,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gtksourceview.so
 %{_gtkdocdir}/pygtksourceview
+
+%files keyring
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomekeyring.so
 
 %files libgtop
 %defattr(644,root,root,755)

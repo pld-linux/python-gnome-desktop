@@ -232,7 +232,6 @@ Wi±zania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
-#%patch0 -p1
 
 %build
 %{__libtoolize}

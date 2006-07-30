@@ -35,6 +35,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
+BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
 %{?with_totem:BuildRequires:	totem-devel >= 1.5.90}
 %pyrequires_eq	python-modules
@@ -53,9 +54,9 @@ Summary:	Development files for GNOME bindings for Python
 Summary(pl):	Pliki programistyczne wi±zañ Pythona do GNOME
 Group:		Libraries/Python
 Requires:	%{name}-applet = %{version}-%{release}
+Requires:	%{name}-libwnck = %{version}-%{release}
 Requires:	%{name}-nautilus-cd-burner = %{version}-%{release}
 Requires:	%{name}-print = %{version}-%{release}
-Requires:	%{name}-libwnck = %{version}-%{release}
 Requires:	python-gnome-devel >= %{gnome_python_req}
 Requires:	python-pygtk-devel >= %{pygtk_req}
 Obsoletes:	python-gnome-extras-devel < 2.13.3
@@ -133,7 +134,7 @@ Libgtop bindings for Python.
 %description libgtop -l pl
 Wi±zania Pythona do biblioteki libgtop.
 
-%package librsvg 
+%package librsvg
 Summary:	Librsvg bindings for Python
 Summary(pl):	Wi±zania Pythona do biblioteki librsvg
 Group:		Libraries/Python

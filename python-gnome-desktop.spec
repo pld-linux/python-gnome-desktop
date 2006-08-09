@@ -1,5 +1,5 @@
 %define		module			gnome-python-desktop
-%define		pygtk_req		2:2.9.3
+%define		pygtk_req		2:2.9.5
 %define		gnome_python_req	2.15.90
 #
 # Conditional builds:
@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl):	Wi±zania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.15.90
-Release:	1
+Release:	2
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.15/%{module}-%{version}.tar.bz2
@@ -18,19 +18,19 @@ BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	gnome-media-devel >= 2.14.2
-BuildRequires:	gnome-panel-devel >= 2.15.90
-BuildRequires:	gnome-vfs2-devel >= 2.15.90
+BuildRequires:	gnome-panel-devel >= 2.15.91
+BuildRequires:	gnome-vfs2-devel >= 2.15.91
 BuildRequires:	gtk+2-devel >= 2:2.10.1
-BuildRequires:	gtksourceview-devel >= 1.7.1
-BuildRequires:	hal-devel >= 0.5.7
+BuildRequires:	gtksourceview-devel >= 1.7.2
+BuildRequires:	hal-devel >= 0.5.7.1
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
-BuildRequires:	libgnomeui-devel >= 2.15.90
+BuildRequires:	libgnomeui-devel >= 2.15.91
 BuildRequires:	libgtop-devel >= 2.14.1
 BuildRequires:	librsvg-devel >= 1:2.15.0
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.15.90
-BuildRequires:	metacity-devel >= 2.15.13
-BuildRequires:	nautilus-cd-burner-devel >= 2.15.5
+BuildRequires:	libwnck-devel >= 2.15.91
+BuildRequires:	metacity-devel >= 2.15.21
+BuildRequires:	nautilus-cd-burner-devel >= 2.15.6
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2

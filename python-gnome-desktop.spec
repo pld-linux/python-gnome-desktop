@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
-%define		pygtk_req		2:2.9.5
-%define		gnome_python_req	2.15.90
+%define		pygtk_req		2:2.10.1
+%define		gnome_python_req	2.16.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,36 +8,36 @@
 Summary:	GNOME bindings for Python
 Summary(pl):	Wi您ania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.15.90
-Release:	3
+Version:	2.16.0
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.15/%{module}-%{version}.tar.bz2
-# Source0-md5:	ddff73b70371c93f49df460d072db948
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.16/%{module}-%{version}.tar.bz2
+# Source0-md5:	ea79fe3e6a65d8380539a9ef6eed963f
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	gnome-media-devel >= 2.14.2
-BuildRequires:	gnome-panel-devel >= 2.15.91
-BuildRequires:	gnome-vfs2-devel >= 2.15.91
-BuildRequires:	gtk+2-devel >= 2:2.10.1
-BuildRequires:	gtksourceview-devel >= 1.7.2
+BuildRequires:	gnome-media-devel >= 2.16.0
+BuildRequires:	gnome-panel-devel >= 2.16.0
+BuildRequires:	gnome-vfs2-devel >= 2.16.0
+BuildRequires:	gtk+2-devel >= 2:2.10.3
+BuildRequires:	gtksourceview-devel >= 1.8.0
 BuildRequires:	hal-devel >= 0.5.7.1
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
-BuildRequires:	libgnomeui-devel >= 2.15.91
-BuildRequires:	libgtop-devel >= 2.14.1
-BuildRequires:	librsvg-devel >= 1:2.15.0
+BuildRequires:	libgnomeui-devel >= 2.16.0
+BuildRequires:	libgtop-devel >= 2.14.3
+BuildRequires:	librsvg-devel >= 1:2.16.0
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.15.91
-BuildRequires:	metacity-devel >= 2.15.21
-BuildRequires:	nautilus-cd-burner-devel >= 2.15.6
+BuildRequires:	libwnck-devel >= 2.16.0
+BuildRequires:	metacity-devel >= 2.16.0
+BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
 BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
-%{?with_totem:BuildRequires:	totem-devel >= 1.5.90}
+%{?with_totem:BuildRequires:	totem-devel >= 1.6.0}
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -113,7 +113,7 @@ Wi您ania Pythona do biblioteki gtksourceview.
 Summary:	GNOME keyring bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki GNOME keyring
 Group:		Libraries/Python
-Requires:	python-pygobject >= 2.11.0
+Requires:	python-pygobject >= 2.12.1
 
 %description keyring
 GNOME keyring bindings for Python.
@@ -125,7 +125,7 @@ Wi您ania Pythona do biblioteki GNOME keyring.
 Summary:	Libgtop bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki libgtop
 Group:		Libraries/Python
-Requires:	python-pygobject >= 2.11.0
+Requires:	python-pygobject >= 2.12.1
 Obsoletes:	python-gnome-extras-libgtop
 
 %description libgtop
@@ -138,7 +138,7 @@ Wi您ania Pythona do biblioteki libgtop.
 Summary:	Librsvg bindings for Python
 Summary(pl):	Wi您ania Pythona do biblioteki librsvg
 Group:		Libraries/Python
-Requires:	librsvg >= 1:2.15.0
+Requires:	librsvg >= 1:2.16.0
 
 %description librsvg
 Librsvg bindings for Python.

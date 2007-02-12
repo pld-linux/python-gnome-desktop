@@ -6,7 +6,7 @@
 %bcond_without	totem		# disable totem support
 #
 Summary:	GNOME bindings for Python
-Summary(pl):	Wi±zania Pythona do bibliotek GNOME
+Summary(pl.UTF-8):   WiÄ…zania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.16.0
 Release:	3
@@ -46,12 +46,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 GNOME bindings for Python.
 
-%description -l pl
-Wi±zania Pythona do bibliotek GNOME.
+%description -l pl.UTF-8
+WiÄ…zania Pythona do bibliotek GNOME.
 
 %package devel
 Summary:	Development files for GNOME bindings for Python
-Summary(pl):	Pliki programistyczne wi±zañ Pythona do GNOME
+Summary(pl.UTF-8):   Pliki programistyczne wiÄ…zaÅ„ Pythona do GNOME
 Group:		Libraries/Python
 Requires:	%{name}-applet = %{version}-%{release}
 Requires:	%{name}-libwnck = %{version}-%{release}
@@ -64,24 +64,24 @@ Obsoletes:	python-gnome-extras-devel < 2.13.3
 %description devel
 Development files for GNOME bindings for Python.
 
-%description devel -l pl
-Pliki programistyczne wi±zañ Pythona do GNOME.
+%description devel -l pl.UTF-8
+Pliki programistyczne wiÄ…zaÅ„ Pythona do GNOME.
 
 %package examples
 Summary:	Example programs for python-gnome-desktop
-Summary(pl):	Przyk³adowe programy do python-gnome-desktop
+Summary(pl.UTF-8):   PrzykÅ‚adowe programy do python-gnome-desktop
 Group:		Libraries/Python
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description examples
 This package contains example programs for python-gnome-desktop.
 
-%description examples -l pl
-Ten pakiet zawiera przyk³adowe programy dla python-gnome-desktop.
+%description examples -l pl.UTF-8
+Ten pakiet zawiera przykÅ‚adowe programy dla python-gnome-desktop.
 
 %package applet
 Summary:	GNOME Applet bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki GNOME Applet
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki GNOME Applet
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-ui >= %{gnome_python_req}
@@ -93,12 +93,12 @@ Obsoletes:	python-gnome-extras-applet
 %description applet
 GNOME Applet bindings for Python.
 
-%description applet -l pl
-Wi±zania Pythona do biblioteki GNOME Applet.
+%description applet -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki GNOME Applet.
 
 %package gtksourceview
 Summary:	Gtksourceview bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki gtksourceview
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki gtksourceview
 Group:		Libraries/Python
 Requires:	%{name}-print = %{version}-%{release}
 Obsoletes:	python-gnome-extras-gtksourceview
@@ -106,24 +106,24 @@ Obsoletes:	python-gnome-extras-gtksourceview
 %description gtksourceview
 Gtksourceview bindings for Python.
 
-%description gtksourceview -l pl
-Wi±zania Pythona do biblioteki gtksourceview.
+%description gtksourceview -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki gtksourceview.
 
 %package keyring
 Summary:	GNOME keyring bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki GNOME keyring
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki GNOME keyring
 Group:		Libraries/Python
 Requires:	python-pygobject >= 2.12.1
 
 %description keyring
 GNOME keyring bindings for Python.
 
-%description keyring -l pl
-Wi±zania Pythona do biblioteki GNOME keyring.
+%description keyring -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki GNOME keyring.
 
 %package libgtop
 Summary:	Libgtop bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki libgtop
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki libgtop
 Group:		Libraries/Python
 Requires:	python-pygobject >= 2.12.1
 Obsoletes:	python-gnome-extras-libgtop
@@ -131,24 +131,24 @@ Obsoletes:	python-gnome-extras-libgtop
 %description libgtop
 Libgtop bindings for Python.
 
-%description libgtop -l pl
-Wi±zania Pythona do biblioteki libgtop.
+%description libgtop -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki libgtop.
 
 %package librsvg
 Summary:	Librsvg bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki librsvg
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki librsvg
 Group:		Libraries/Python
 Requires:	librsvg >= 1:2.16.0
 
 %description librsvg
 Librsvg bindings for Python.
 
-%description librsvg -l pl
-Wi±zania Pythona do biblioteki librsvg.
+%description librsvg -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki librsvg.
 
 %package libwnck
 Summary:	Libwnck bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki libwnck
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki libwnck
 Group:		Libraries/Python
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 Obsoletes:	python-gnome-extras-libwnck
@@ -156,12 +156,12 @@ Obsoletes:	python-gnome-extras-libwnck
 %description libwnck
 Libwnck bindings for Python.
 
-%description libwnck -l pl
-Wi±zania Pythona do biblioteki libwnck.
+%description libwnck -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki libwnck.
 
 %package mediaprofiles
 Summary:	gnome-media-profiles bindings for Python
-Summary(pl):	Wi±zania Pythona do gnome-media-profiles
+Summary(pl.UTF-8):   WiÄ…zania Pythona do gnome-media-profiles
 Group:		Libraries/Python
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
@@ -170,12 +170,12 @@ Obsoletes:	python-gnome-extras-mediaprofiles
 %description mediaprofiles
 gnome-media-profiles bindings for Python.
 
-%description mediaprofiles -l pl
-Wi±zania Pythona do gnome-media-profiles.
+%description mediaprofiles -l pl.UTF-8
+WiÄ…zania Pythona do gnome-media-profiles.
 
 %package metacity
 Summary:	Metacity bindings for Python
-Summary(pl):	Wi±zania Pythona do Metacity
+Summary(pl.UTF-8):   WiÄ…zania Pythona do Metacity
 Group:		Libraries/Python
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
@@ -183,12 +183,12 @@ Requires:	python-pygtk-glade >= %{pygtk_req}
 %description metacity
 Metacity bindings for Python.
 
-%description metacity -l pl
-Wi±zania Pythona do Metacity.
+%description metacity -l pl.UTF-8
+WiÄ…zania Pythona do Metacity.
 
 %package nautilus-cd-burner
 Summary:	Nautilus-cd-burner bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki nautilus-cd-burner
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki nautilus-cd-burner
 Group:		Libraries/Python
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 Obsoletes:	python-gnome-extras-nautilus-cd-burner
@@ -196,12 +196,12 @@ Obsoletes:	python-gnome-extras-nautilus-cd-burner
 %description nautilus-cd-burner
 Nautilus-cd-burner bindings for Python.
 
-%description nautilus-cd-burner -l pl
-Wi±zania Pythona do biblioteki nautilus-cd-burner.
+%description nautilus-cd-burner -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki nautilus-cd-burner.
 
 %package print
 Summary:	GNOME Print bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki GNOME obs³ugi drukowania
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki GNOME obsÅ‚ugi drukowania
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-canvas >= %{gnome_python_req}
@@ -214,12 +214,12 @@ Obsoletes:	python-gnome-print-ui
 %description print
 GNOME Print bindings for Python.
 
-%description print -l pl
-Wi±zania Pythona do biblioteki GNOME obs³ugi drukowania.
+%description print -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki GNOME obsÅ‚ugi drukowania.
 
 %package totem
 Summary:	Totem bindings for Python
-Summary(pl):	Wi±zania Pythona do biblioteki totem
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki totem
 Group:		Libraries/Python
 Requires:	python-gnome-vfs >= %{gnome_python_req}
 Requires:	python-pygtk-gtk >= %{pygtk_req}
@@ -228,8 +228,8 @@ Obsoletes:	python-gnome-extras-totem
 %description totem
 Totem bindings for Python.
 
-%description totem -l pl
-Wi±zania Pythona do biblioteki totem.
+%description totem -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}

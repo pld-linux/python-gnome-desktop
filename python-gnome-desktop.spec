@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
-%define		pygtk_req		2:2.10.1
-%define		gnome_python_req	2.16.0
+%define		pygtk_req		2:2.10.4
+%define		gnome_python_req	2.17.92
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,31 +8,29 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.16.0
-Release:	3
+Version:	2.17.93
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.16/%{module}-%{version}.tar.bz2
-# Source0-md5:	ea79fe3e6a65d8380539a9ef6eed963f
-BuildRequires:	GConf2-devel >= 2.14.0
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.17/%{module}-%{version}.tar.bz2
+# Source0-md5:	1b3d44ab604d0460ab55bcfc48c6ae46
+BuildRequires:	GConf2-devel >= 2.18.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	gnome-media-devel >= 2.16.0
-BuildRequires:	gnome-panel-devel >= 2.16.0
-BuildRequires:	gnome-vfs2-devel >= 2.16.0
-BuildRequires:	gtk+2-devel >= 2:2.10.3
-BuildRequires:	gtksourceview-devel >= 1.8.0
-BuildRequires:	hal-devel >= 0.5.7.1
-BuildRequires:	libgnomeprintui-devel >= 2.12.1
-BuildRequires:	libgnomeui-devel >= 2.16.0
-BuildRequires:	libgtop-devel >= 2.14.3
-BuildRequires:	librsvg-devel >= 1:2.16.0
+BuildRequires:	gnome-keyring-devel >= 0.7.92
+BuildRequires:	gnome-media-devel >= 2.17.91
+BuildRequires:	gnome-panel-devel >= 2.17.92
+BuildRequires:	gnome-vfs2-devel >= 2.17.91
+BuildRequires:	gtk+2-devel >= 2:2.10.9
+BuildRequires:	gtksourceview-devel >= 1.8.4
+BuildRequires:	libgnomeprintui-devel >= 2.17.92
+BuildRequires:	libgtop-devel >= 2.14.8
+BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.16.0
-BuildRequires:	metacity-devel >= 2.16.0
-BuildRequires:	nautilus-cd-burner-devel >= 2.16.0
+BuildRequires:	libwnck-devel >= 2.17.92
+BuildRequires:	metacity-devel >= 2.17.8
+BuildRequires:	nautilus-cd-burner-devel >= 2.17.8
 BuildRequires:	pkgconfig
-BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
@@ -138,7 +136,7 @@ Wiązania Pythona do biblioteki libgtop.
 Summary:	Librsvg bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki librsvg
 Group:		Libraries/Python
-Requires:	librsvg >= 1:2.16.0
+Requires:	librsvg >= 1:2.16.1
 
 %description librsvg
 Librsvg bindings for Python.
@@ -239,7 +237,8 @@ Wiązania Pythona do biblioteki totem.
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	--enable-metacity
 %{__make} \
 	HTML_DIR=%{_gtkdocdir}
 

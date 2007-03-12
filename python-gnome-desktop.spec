@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.10.4
-%define		gnome_python_req	2.17.92
+%define		gnome_python_req	2.18.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,22 +8,22 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.17.93
+Version:	2.18.0
 Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.17/%{module}-%{version}.tar.bz2
-# Source0-md5:	1b3d44ab604d0460ab55bcfc48c6ae46
-BuildRequires:	GConf2-devel >= 2.18.0
+Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.18/%{module}-%{version}.tar.bz2
+# Source0-md5:	ce1b1c095a69c2656177570a2939fabb
+BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	gnome-keyring-devel >= 0.7.92
+BuildRequires:	gnome-keyring-devel >= 0.8
 BuildRequires:	gnome-media-devel >= 2.17.91
 BuildRequires:	gnome-panel-devel >= 2.17.92
-BuildRequires:	gnome-vfs2-devel >= 2.17.91
+BuildRequires:	gnome-vfs2-devel >= 2.18.0
 BuildRequires:	gtk+2-devel >= 2:2.10.9
 BuildRequires:	gtksourceview-devel >= 1.8.4
-BuildRequires:	libgnomeprintui-devel >= 2.17.92
+BuildRequires:	libgnomeprintui-devel >= 2.18.0
 BuildRequires:	libgtop-devel >= 2.14.8
 BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libtool
@@ -252,7 +252,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.la,*/{*.la,*.py}}
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{{*.la,*.py},*/{*.la,*.py}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -263,6 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/gnomedesktop
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
 %{py_sitedir}/gtk-2.0/gnomedesktop/*.py[co]
+%{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
 %defattr(644,root,root,755)

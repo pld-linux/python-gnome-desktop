@@ -29,7 +29,7 @@ BuildRequires:	libgtop-devel >= 2.14.8
 BuildRequires:	librsvg-devel >= 1:2.16.1
 BuildRequires:	libtool
 BuildRequires:	libwnck-devel >= 2.17.92
-BuildRequires:	metacity-devel >= 2.17.8
+BuildRequires:	metacity-devel >= 2:2.19.8
 BuildRequires:	nautilus-cd-burner-devel >= 2.17.8
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2

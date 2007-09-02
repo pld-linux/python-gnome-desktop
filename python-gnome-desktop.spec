@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.10.4
-%define		gnome_python_req	2.18.0
+%define		gnome_python_req	2.19.2
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -12,31 +12,32 @@ Version:	2.19.2
 Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/gnome/sources/gnome-python-desktop/2.19/%{module}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.19/%{module}-%{version}.tar.bz2
 # Source0-md5:	721c44d315bd76f003c0325323d89913
-BuildRequires:	GConf2-devel >= 2.18.0.1
+BuildRequires:	GConf2-devel >= 2.19.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	bug-buddy >= 2.16.0
-BuildRequires:	gnome-keyring-devel >= 0.8
-BuildRequires:	gnome-media-devel >= 2.17.91
-BuildRequires:	gnome-panel-devel >= 2.17.92
-BuildRequires:	gnome-vfs2-devel >= 2.18.0
-BuildRequires:	gtk+2-devel >= 2:2.10.9
-BuildRequires:	gtksourceview-devel >= 1.8.4
+BuildRequires:	bug-buddy >= 2.19.91
+BuildRequires:	gnome-common >= 2.18.0
+BuildRequires:	gnome-desktop-devel >= 2.19.90
+BuildRequires:	gnome-keyring-devel >= 2.19.91
+BuildRequires:	gnome-media-devel >= 2.18.0
+BuildRequires:	gnome-panel-devel >= 2.19.6
+BuildRequires:	gtk+2-devel >= 2:2.10.14
+BuildRequires:	gtksourceview-devel >= 1.8.5
 BuildRequires:	libgnomeprintui-devel >= 2.18.0
-BuildRequires:	libgtop-devel >= 2.14.8
-BuildRequires:	librsvg-devel >= 1:2.16.1
+BuildRequires:	libgtop-devel >= 2.19.92
+BuildRequires:	librsvg-devel >= 1:2.18.2
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.17.92
-BuildRequires:	metacity-devel >= 2:2.19.8
-BuildRequires:	nautilus-cd-burner-devel >= 2.17.8
+BuildRequires:	libwnck-devel >= 2.19.90
+BuildRequires:	metacity-devel >= 2:2.19.55
+BuildRequires:	nautilus-cd-burner-devel >= 2.19.6
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
-%{?with_totem:BuildRequires:	totem-devel >= 1.6.0}
+%{?with_totem:BuildRequires:	totem-devel >= 2.19.90}
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -137,7 +138,7 @@ Wiązania Pythona do biblioteki libgtop.
 Summary:	Librsvg bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki librsvg
 Group:		Libraries/Python
-Requires:	librsvg >= 1:2.16.1
+Requires:	librsvg >= 1:2.18.2
 
 %description librsvg
 Librsvg bindings for Python.

@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
-%define		pygtk_req		2:2.10.4
-%define		gnome_python_req	2.18.0
+%define		pygtk_req		2:2.12.0
+%define		gnome_python_req	2.20.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -17,20 +17,20 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.20/%{modu
 BuildRequires:	GConf2-devel >= 2.19.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	bug-buddy >= 2.16.0
-BuildRequires:	gnome-keyring-devel >= 0.8
-BuildRequires:	gnome-media-devel >= 2.17.91
-BuildRequires:	gnome-panel-devel >= 2.17.92
-BuildRequires:	gnome-vfs2-devel >= 2.18.0
-BuildRequires:	gtk+2-devel >= 2:2.10.9
+BuildRequires:	bug-buddy >= 2.20.0
+BuildRequires:	gnome-keyring-devel >= 2.20
+BuildRequires:	gnome-media-devel >= 2.20.0
+BuildRequires:	gnome-panel-devel >= 2.20.0
+BuildRequires:	gnome-vfs2-devel >= 2.20.0
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtksourceview-devel >= 1.8.4
-BuildRequires:	libgnomeprintui-devel >= 2.18.0
-BuildRequires:	libgtop-devel >= 2.14.8
-BuildRequires:	librsvg-devel >= 1:2.16.1
+BuildRequires:	libgnomeprintui-devel >= 2.18.1
+BuildRequires:	libgtop-devel >= 2.20.0
+BuildRequires:	librsvg-devel >= 1:2.18.1
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.17.92
-BuildRequires:	metacity-devel >= 2.17.8
-BuildRequires:	nautilus-cd-burner-devel >= 2.17.8
+BuildRequires:	libwnck-devel >= 2.20.0
+BuildRequires:	metacity-devel >= 2.20.0
+BuildRequires:	nautilus-cd-burner-devel >= 2.20.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
@@ -112,7 +112,7 @@ Wiązania Pythona do biblioteki gtksourceview.
 Summary:	GNOME keyring bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GNOME keyring
 Group:		Libraries/Python
-Requires:	python-pygobject >= 2.12.1
+Requires:	python-pygobject >= 2.14.0
 
 %description keyring
 GNOME keyring bindings for Python.
@@ -124,7 +124,7 @@ Wiązania Pythona do biblioteki GNOME keyring.
 Summary:	Libgtop bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgtop
 Group:		Libraries/Python
-Requires:	python-pygobject >= 2.12.1
+Requires:	python-pygobject >= 2.14.0
 Obsoletes:	python-gnome-extras-libgtop
 
 %description libgtop
@@ -137,7 +137,7 @@ Wiązania Pythona do biblioteki libgtop.
 Summary:	Librsvg bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki librsvg
 Group:		Libraries/Python
-Requires:	librsvg >= 1:2.16.1
+Requires:	librsvg >= 1:2.18.1
 
 %description librsvg
 Librsvg bindings for Python.

@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.20.0
-Release:	1
+Release:	2
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.20/%{module}-%{version}.tar.bz2
@@ -65,6 +65,18 @@ Development files for GNOME bindings for Python.
 
 %description devel -l pl.UTF-8
 Pliki programistyczne wiązań Pythona do GNOME.
+
+%package apidocs
+Summary:	GNOME bindings for Python API documentation
+Summary(pl.UTF-8):	Dokumentacja API wiązań Pythona do GNOME
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+GNOME bindings for Python API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API wiązań Pythona do GNOME.
 
 %package examples
 Summary:	Example programs for python-gnome-desktop
@@ -271,6 +283,12 @@ rm -rf $RPM_BUILD_ROOT
 %{pydefsdir}/*
 %{_pkgconfigdir}/*.pc
 
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/pygnomeprint
+%{_gtkdocdir}/pygnomeprintui
+%{_gtkdocdir}/pygtksourceview
+
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
@@ -283,7 +301,6 @@ rm -rf $RPM_BUILD_ROOT
 %files gtksourceview
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gtksourceview.so
-%{_gtkdocdir}/pygtksourceview
 
 %files keyring
 %defattr(644,root,root,755)
@@ -318,8 +335,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/gnomeprint
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeprint/*.so
 %{py_sitedir}/gtk-2.0/gnomeprint/*.py?
-%{_gtkdocdir}/pygnomeprint
-%{_gtkdocdir}/pygnomeprintui
 
 %if %{with totem}
 %files totem

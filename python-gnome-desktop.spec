@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.12.0
-%define		gnome_python_req	2.20.0
+%define		gnome_python_req	2.22.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,35 +8,32 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.20.0
-Release:	2
+Version:	2.22.0
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.20/%{module}-%{version}.tar.bz2
-# Source0-md5:	02b177f488091d27bf0648ec4660d8f7
-BuildRequires:	GConf2-devel >= 2.19.1
-BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
-BuildRequires:	bug-buddy >= 2.20.0
-BuildRequires:	gnome-keyring-devel >= 2.20
-BuildRequires:	gnome-media-devel >= 2.20.0
-BuildRequires:	gnome-panel-devel >= 2.20.0
-BuildRequires:	gnome-vfs2-devel >= 2.20.0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{module}-%{version}.tar.bz2
+# Source0-md5:	504877a973f6abc0788283232cd703cb
+BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	bug-buddy >= 2.22.0
+BuildRequires:	gnome-keyring-devel >= 2.22.0
+BuildRequires:	gnome-media-devel >= 2.22.0
+BuildRequires:	gnome-panel-devel >= 2.22.0
+BuildRequires:	gnome-vfs2-devel >= 2.22.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtksourceview-devel >= 1.8.4
 BuildRequires:	libgnomeprintui-devel >= 2.18.1
-BuildRequires:	libgtop-devel >= 2.20.0
-BuildRequires:	librsvg-devel >= 1:2.18.1
+BuildRequires:	libgtop-devel >= 2.22.0
+BuildRequires:	librsvg-devel >= 1:2.22.0
 BuildRequires:	libtool
-BuildRequires:	libwnck-devel >= 2.20.0
-BuildRequires:	metacity-devel >= 2.20.0
-BuildRequires:	nautilus-cd-burner-devel >= 2.20.0
+BuildRequires:	libwnck-devel >= 2.22.0
+BuildRequires:	nautilus-cd-burner-devel >= 2.22.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
-%{?with_totem:BuildRequires:	totem-devel >= 1.6.0}
+%{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -107,6 +104,23 @@ GNOME Applet bindings for Python.
 %description applet -l pl.UTF-8
 Wiązania Pythona do biblioteki GNOME Applet.
 
+%package evolution
+Summary:	Evolution bindings for Python
+Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Evolution
+Group:		Libraries/Python
+Requires:	%{name} = %{version}-%{release}
+Requires:	python-gnome-ui >= %{gnome_python_req}
+Requires:	python-pygtk-glade >= %{pygtk_req}
+Provides:	python-gnome-applet
+Obsoletes:	python-gnome-applet
+Obsoletes:	python-gnome-extras-applet
+
+%description evolution
+Evolution bindings for Python.
+
+%description evolution -l pl.UTF-8
+Wiązania Pythona do bibliotek Evolution.
+
 %package gtksourceview
 Summary:	Gtksourceview bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki gtksourceview
@@ -149,7 +163,7 @@ Wiązania Pythona do biblioteki libgtop.
 Summary:	Librsvg bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki librsvg
 Group:		Libraries/Python
-Requires:	librsvg >= 1:2.18.1
+Requires:	librsvg >= 1:2.22.0
 
 %description librsvg
 Librsvg bindings for Python.
@@ -183,19 +197,6 @@ gnome-media-profiles bindings for Python.
 
 %description mediaprofiles -l pl.UTF-8
 Wiązania Pythona do gnome-media-profiles.
-
-%package metacity
-Summary:	Metacity bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do Metacity
-Group:		Libraries/Python
-Requires:	python-gnome-ui >= %{gnome_python_req}
-Requires:	python-pygtk-glade >= %{pygtk_req}
-
-%description metacity
-Metacity bindings for Python.
-
-%description metacity -l pl.UTF-8
-Wiązania Pythona do Metacity.
 
 %package nautilus-cd-burner
 Summary:	Nautilus-cd-burner bindings for Python
@@ -246,22 +247,17 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure \
-	--enable-metacity
-%{__make} \
-	HTML_DIR=%{_gtkdocdir}
+./waf configure \
+	--prefix %{_prefix} \
+	--libdir %{_libdir}
+./waf build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	HTML_DIR=%{_gtkdocdir}
+./waf install \
+	--destdir $RPM_BUILD_ROOT
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -276,7 +272,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/gnomedesktop
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
 %{py_sitedir}/gtk-2.0/gnomedesktop/*.py[co]
-%{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
 %defattr(644,root,root,755)
@@ -285,9 +280,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/pygnomeprint
-%{_gtkdocdir}/pygnomeprintui
-%{_gtkdocdir}/pygtksourceview
+%{_datadir}/gtk-doc/html/pygnomeprint
+%{_datadir}/gtk-doc/html/pygnomeprintui
+%{_datadir}/gtk-doc/html/pygtksourceview
 
 %files examples
 %defattr(644,root,root,755)
@@ -296,7 +291,13 @@ rm -rf $RPM_BUILD_ROOT
 %files applet
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
-%{py_sitedir}/gtk-2.0/gnome/applet.py?
+
+%files evolution
+%defattr(644,root,root,755)
+%dir %{py_sitedir}/gtk-2.0/evolution
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ebook.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ecal.so
+%{py_sitedir}/gtk-2.0/evolution/*.py[co]
 
 %files gtksourceview
 %defattr(644,root,root,755)
@@ -321,10 +322,6 @@ rm -rf $RPM_BUILD_ROOT
 %files mediaprofiles
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/mediaprofiles.so
-
-%files metacity
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/metacity.so
 
 %files nautilus-cd-burner
 %defattr(644,root,root,755)

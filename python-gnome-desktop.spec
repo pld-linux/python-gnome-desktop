@@ -33,7 +33,9 @@ BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
+BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
+BuildRequires:	waf
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -247,22 +249,23 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-./waf configure \
+%waf configure \
 	--prefix %{_prefix} \
 	--libdir %{_libdir}
-./waf build
+%{__waf} -v build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-./waf install \
+%{__waf} install \
 	--destdir $RPM_BUILD_ROOT
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{{*.la,*.py},*/{*.la,*.py}}
 
+# wscript doesn't allow to pass proper gtk-doc dir
 if [ ! -d $RPM_BUILD_ROOT%{_gtkdocdir} ]; then
 	install -d $RPM_BUILD_ROOT%{_gtkdocdir}
 	mv $RPM_BUILD_ROOT%{_datadir}/gtk-doc/html/* $RPM_BUILD_ROOT%{_gtkdocdir}

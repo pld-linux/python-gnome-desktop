@@ -16,6 +16,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{modu
 # Source0-md5:	504877a973f6abc0788283232cd703cb
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
+BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-keyring-devel >= 2.22.0
 BuildRequires:	gnome-media-devel >= 2.22.0
 BuildRequires:	gnome-panel-devel >= 2.22.0

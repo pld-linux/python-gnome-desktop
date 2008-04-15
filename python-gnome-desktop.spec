@@ -280,12 +280,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS COPYING ChangeLog NEWS
 %dir %{py_sitedir}/gtk-2.0/gnomedesktop
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
-%{py_sitedir}/gtk-2.0/gnomedesktop/*.py[co]
+%{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
 
 %files devel
 %defattr(644,root,root,755)
-%{pydefsdir}/*
-%{_pkgconfigdir}/*.pc
+%{pydefsdir}/*.defs
+%{_pkgconfigdir}/gnome-python-desktop.pc
 
 %files apidocs
 %defattr(644,root,root,755)
@@ -306,7 +306,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/evolution
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ebook.so
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ecal.so
-%{py_sitedir}/gtk-2.0/evolution/*.py[co]
+%{py_sitedir}/gtk-2.0/evolution/__init__.py[co]
 
 %files gtksourceview
 %defattr(644,root,root,755)
@@ -339,13 +339,14 @@ rm -rf $RPM_BUILD_ROOT
 %files print
 %defattr(644,root,root,755)
 %dir %{py_sitedir}/gtk-2.0/gnomeprint
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeprint/*.so
-%{py_sitedir}/gtk-2.0/gnomeprint/*.py?
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeprint/_print.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeprint/ui.so
+%{py_sitedir}/gtk-2.0/gnomeprint/__init__.py[co]
 
 %if %{with totem}
 %files totem
 %defattr(644,root,root,755)
 %dir %{py_sitedir}/gtk-2.0/totem
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/totem/*.so
-%{py_sitedir}/gtk-2.0/totem/__init__.py?
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/totem/plparser.so
+%{py_sitedir}/gtk-2.0/totem/__init__.py[co]
 %endif

@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.22.0
-Release:	2
+Release:	3
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{module}-%{version}.tar.bz2
@@ -285,7 +285,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{pydefsdir}/*.defs
-%{_pkgconfigdir}/gnome-python-desktop.pc
+%{_pkgconfigdir}/gnome-python-desktop-2.0.pc
 
 %files apidocs
 %defattr(644,root,root,755)

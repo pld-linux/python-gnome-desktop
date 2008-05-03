@@ -9,10 +9,11 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.22.0
-Release:	3
+Release:	4
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{module}-%{version}.tar.bz2
+Patch0:		%{name}-gnomekeyring-result-check.patch
 # Source0-md5:	504877a973f6abc0788283232cd703cb
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
@@ -248,6 +249,7 @@ Wiązania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p0
 
 %build
 %waf configure \

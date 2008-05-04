@@ -7,7 +7,7 @@ Index: gnomekeyring/gnomekeyring.override
      if (pygnomekeyring_result_check(ret))
          return NULL;
 -    if (ret)
-+    if (ret == GNOME_KEYRING_RESULT_OK)
++    if (keyring)
          return PyString_FromString(keyring);
      else {
          Py_INCREF(Py_None);

@@ -8,13 +8,12 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.22.0
-Release:	4
+Version:	2.23.0
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{module}-%{version}.tar.bz2
-Patch0:		%{name}-gnomekeyring-result-check.patch
-# Source0-md5:	504877a973f6abc0788283232cd703cb
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.23/%{module}-%{version}.tar.bz2
+# Source0-md5:	d8f8e61d99402e8b0a82d3c8d6e873be
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
 BuildRequires:	gnome-desktop-devel >= 2.10.0
@@ -37,7 +36,7 @@ BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
-BuildRequires:	waf
+BuildRequires:	waf >= 1.4.2
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -249,7 +248,6 @@ Wiązania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p0
 
 %build
 %waf configure \
@@ -316,7 +314,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files keyring
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomekeyring.so
+%attr(755,root,root) %{py_sitedir}/gnomekeyring.so
 
 %files libgtop
 %defattr(644,root,root,755)

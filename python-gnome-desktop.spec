@@ -114,9 +114,8 @@ Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
-Provides:	python-gnome-applet
-Obsoletes:	python-gnome-applet
-Obsoletes:	python-gnome-extras-applet
+Provides:	python-evolution
+Obsoletes:	python-evolution
 
 %description evolution
 Evolution bindings for Python.

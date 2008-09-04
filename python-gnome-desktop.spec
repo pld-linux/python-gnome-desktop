@@ -8,12 +8,12 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.23.0
+Version:	2.23.1
 Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.23/%{module}-%{version}.tar.bz2
-# Source0-md5:	d8f8e61d99402e8b0a82d3c8d6e873be
+# Source0-md5:	815174cde8eb1be3d0924f7b8a04c7ee
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
 BuildRequires:	gnome-desktop-devel >= 2.10.0

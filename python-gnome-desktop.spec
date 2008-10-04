@@ -8,13 +8,12 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.22.0
-Release:	5
+Version:	2.24.0
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.22/%{module}-%{version}.tar.bz2
-Patch0:		%{name}-gnomekeyring-result-check.patch
-# Source0-md5:	504877a973f6abc0788283232cd703cb
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.24/%{module}-%{version}.tar.bz2
+# Source0-md5:	a6689e581fc2e67937593033be7007f9
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
 BuildRequires:	gnome-desktop-devel >= 2.10.0
@@ -37,7 +36,7 @@ BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
-BuildRequires:	waf
+BuildRequires:	waf >= 1.4.2
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -115,9 +114,8 @@ Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-ui >= %{gnome_python_req}
 Requires:	python-pygtk-glade >= %{pygtk_req}
-Provides:	python-gnome-applet
-Obsoletes:	python-gnome-applet
-Obsoletes:	python-gnome-extras-applet
+Provides:	python-evolution
+Obsoletes:	python-evolution
 
 %description evolution
 Evolution bindings for Python.
@@ -249,7 +247,6 @@ Wiązania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p0
 
 %build
 %waf configure \
@@ -316,7 +313,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files keyring
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomekeyring.so
+%attr(755,root,root) %{py_sitedir}/gnomekeyring.so
 
 %files libgtop
 %defattr(644,root,root,755)

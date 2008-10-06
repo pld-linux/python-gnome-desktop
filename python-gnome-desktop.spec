@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.24.0
-Release:	1
+Release:	2
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.24/%{module}-%{version}.tar.bz2
@@ -261,6 +261,11 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__waf} install \
 	--destdir $RPM_BUILD_ROOT
 
+# workaround http://bugzilla.gnome.org/show_bug.cgi?id=555137
+install bugbuddy.py $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/bugbuddy.py
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
+
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{{*.la,*.py},*/{*.la,*.py}}
@@ -280,6 +285,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/gnomedesktop
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
 %{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
+%{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
 %defattr(644,root,root,755)

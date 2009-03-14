@@ -249,16 +249,16 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-./waf configure \
+%waf configure \
 	--prefix %{_prefix} \
 	--libdir %{_libdir}
-./waf -v build
+%{__waf} -v build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-./waf install \
+%{__waf} install \
 	--destdir $RPM_BUILD_ROOT
 
 # workaround http://bugzilla.gnome.org/show_bug.cgi?id=555137

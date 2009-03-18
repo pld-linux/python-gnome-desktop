@@ -1,6 +1,6 @@
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.12.0
-%define		gnome_python_req	2.22.0
+%define		gnome_python_req	2.26.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
@@ -8,12 +8,12 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.24.1
-Release:	3
+Version:	2.26.0
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.24/%{module}-%{version}.tar.bz2
-# Source0-md5:	3eac6b859bff98148b021c9d11224ca5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.26/%{module}-%{version}.tar.bz2
+# Source0-md5:	fbcf4ef5ec4a8c4eec4d390c5889c80f
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	bug-buddy >= 2.22.0
 BuildRequires:	gnome-desktop-devel >= 2.10.0
@@ -36,7 +36,6 @@ BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
-BuildRequires:	waf >= 1.4.2
 %pyrequires_eq	python-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -249,16 +248,16 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-%waf configure \
+./waf configure \
 	--prefix %{_prefix} \
 	--libdir %{_libdir}
-%{__waf} -v build
+./waf -v build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__waf} install \
+./waf install \
 	--destdir $RPM_BUILD_ROOT
 
 # workaround http://bugzilla.gnome.org/show_bug.cgi?id=555137
@@ -323,7 +322,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files keyring
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gnomekeyring.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomekeyring.so
 
 %files libgtop
 %defattr(644,root,root,755)

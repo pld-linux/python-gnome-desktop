@@ -15,7 +15,9 @@ Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.28/%{module}-%{version}.tar.bz2
 # Source0-md5:	d97bb3d8e1adc00505be060fbc832f44
 BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	brasero-devel
 BuildRequires:	bug-buddy >= 2.22.0
+BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-keyring-devel >= 2.22.0
 BuildRequires:	gnome-media-devel >= 2.22.0
@@ -34,6 +36,7 @@ BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 %pyrequires_eq	python-modules

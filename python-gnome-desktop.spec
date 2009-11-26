@@ -17,6 +17,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.28/%{modu
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	brasero-devel
 BuildRequires:	bug-buddy >= 2.22.0
+BuildRequires:	evince-devel
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-keyring-devel >= 2.22.0
@@ -108,6 +109,28 @@ GNOME Applet bindings for Python.
 
 %description applet -l pl.UTF-8
 Wiązania Pythona do biblioteki GNOME Applet.
+
+%package brasero
+Summary:	Brasero bindings for Python
+Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Brasero
+Group:		Libraries/Python
+
+%description brasero
+Brasero bindings for Python.
+
+%description brasero -l pl.UTF-8
+Wiązania Pythona do bibliotek Brasero.
+
+%package evince
+Summary:	Evince bindings for Python
+Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Evince
+Group:		Libraries/Python
+
+%description evince
+Evince bindings for Python.
+
+%description evince -l pl.UTF-8
+Wiązania Pythona do bibliotek Evince.
 
 %package evolution
 Summary:	Evolution bindings for Python
@@ -311,6 +334,15 @@ rm -rf $RPM_BUILD_ROOT
 %files applet
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
+
+%files brasero
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
+
+%files evince
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
 
 %files evolution
 %defattr(644,root,root,755)

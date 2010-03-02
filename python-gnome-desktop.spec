@@ -8,16 +8,16 @@
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
-Version:	2.28.0
-Release:	2
+Version:	2.29.1
+Release:	1
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.28/%{module}-%{version}.tar.bz2
-# Source0-md5:	d97bb3d8e1adc00505be060fbc832f44
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.29/%{module}-%{version}.tar.bz2
+# Source0-md5:	22bb3b93c9d209d6ad23ca56e1d507bc
 BuildRequires:	GConf2-devel >= 2.22.0
-BuildRequires:	brasero-devel
+BuildRequires:	brasero-devel >= 2.29.0
 BuildRequires:	bug-buddy >= 2.22.0
-BuildRequires:	evince-devel
+BuildRequires:	evince-devel >= 2.29.91
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-keyring-devel >= 2.22.0

@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.30.0
-Release:	1
+Release:	2
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.30/%{module}-%{version}.tar.bz2
@@ -31,7 +31,6 @@ BuildRequires:	libgtop-devel >= 2.22.0
 BuildRequires:	librsvg-devel >= 1:2.22.0
 BuildRequires:	libtool
 BuildRequires:	libwnck-devel >= 2.22.0
-BuildRequires:	nautilus-cd-burner-devel >= 2.22.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
@@ -41,6 +40,8 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 %pyrequires_eq	python-modules
+Obsoletes:	python-gnome-desktop-nautilus-cd-burner
+Obsoletes:	python-gnome-extras-nautilus-cd-burner
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define pydefsdir %(pkg-config --variable=defsdir pygtk-2.0)
@@ -57,7 +58,6 @@ Summary(pl.UTF-8):	Pliki programistyczne wiązań Pythona do GNOME
 Group:		Libraries/Python
 Requires:	%{name}-applet = %{version}-%{release}
 Requires:	%{name}-libwnck = %{version}-%{release}
-Requires:	%{name}-nautilus-cd-burner = %{version}-%{release}
 Requires:	%{name}-print = %{version}-%{release}
 Requires:	python-gnome-devel >= %{gnome_python_req}
 Requires:	python-pygtk-devel >= %{pygtk_req}
@@ -225,19 +225,6 @@ gnome-media-profiles bindings for Python.
 %description mediaprofiles -l pl.UTF-8
 Wiązania Pythona do gnome-media-profiles.
 
-%package nautilus-cd-burner
-Summary:	Nautilus-cd-burner bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do biblioteki nautilus-cd-burner
-Group:		Libraries/Python
-Requires:	python-pygtk-gtk >= %{pygtk_req}
-Obsoletes:	python-gnome-extras-nautilus-cd-burner
-
-%description nautilus-cd-burner
-Nautilus-cd-burner bindings for Python.
-
-%description nautilus-cd-burner -l pl.UTF-8
-Wiązania Pythona do biblioteki nautilus-cd-burner.
-
 %package print
 Summary:	GNOME Print bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GNOME obsługi drukowania
@@ -374,10 +361,6 @@ rm -rf $RPM_BUILD_ROOT
 %files mediaprofiles
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/mediaprofiles.so
-
-%files nautilus-cd-burner
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/nautilusburn.so
 
 %files print
 %defattr(644,root,root,755)

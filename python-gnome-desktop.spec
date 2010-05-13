@@ -20,16 +20,16 @@ BuildRequires:	bug-buddy >= 2.22.0
 BuildRequires:	evince-devel >= 2.30.0
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop-devel >= 2.10.0
-BuildRequires:	gnome-keyring-devel >= 2.22.0
 BuildRequires:	gnome-media-devel >= 2.22.0
 BuildRequires:	gnome-panel-devel >= 2.22.0
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtksourceview-devel >= 1.8.4
+BuildRequires:	libgnome-keyring-devel >= 2.22.0
 BuildRequires:	libgnomeprintui-devel >= 2.18.1
+BuildRequires:	libgnomeui-devel
 BuildRequires:	libgtop-devel >= 2.22.0
 BuildRequires:	librsvg-devel >= 1:2.22.0
-BuildRequires:	libtool
 BuildRequires:	libwnck-devel >= 2.22.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2

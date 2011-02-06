@@ -1,10 +1,10 @@
-%define		module			gnome-python-desktop
-%define		pygtk_req		2:2.12.0
-%define		gnome_python_req	2.26.0
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
 #
+%define		module			gnome-python-desktop
+%define		pygtk_req		2:2.12.0
+%define		gnome_python_req	2.26.0
 Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop

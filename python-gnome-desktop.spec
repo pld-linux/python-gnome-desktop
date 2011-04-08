@@ -1,4 +1,9 @@
 #
+# TODO: evince, brasero and mediaprofiles are disabled because these things have
+# been ported to GTK+3. It's not practical to mix GTK+2 and GTK+3 bindings
+# in gnome-python2-desktop, so for now we'll just have to disable the GTK+3
+# stuff.
+#
 # Conditional builds:
 %bcond_without	totem		# disable totem support
 #
@@ -15,9 +20,9 @@ Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
 # Source0-md5:	0e73fa80ace5c861777e0b523c6ead9d
 BuildRequires:	GConf2-devel >= 2.22.0
-BuildRequires:	brasero-devel >= 2.30.0
+#BuildRequires:	brasero-devel >= 2.30.0
 BuildRequires:	bug-buddy >= 2.22.0
-BuildRequires:	evince-devel >= 2.32.0
+#BuildRequires:	evince-devel >= 2.32.0
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop-devel >= 2.10.0
 BuildRequires:	gnome-media-devel >= 2.22.0
@@ -110,6 +115,7 @@ GNOME Applet bindings for Python.
 %description applet -l pl.UTF-8
 Wiązania Pythona do biblioteki GNOME Applet.
 
+%if 0
 %package brasero
 Summary:	Brasero bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Brasero
@@ -131,6 +137,7 @@ Evince bindings for Python.
 
 %description evince -l pl.UTF-8
 Wiązania Pythona do bibliotek Evince.
+%endif
 
 %package evolution
 Summary:	Evolution bindings for Python
@@ -322,14 +329,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 #%%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
 
+%if 0
 %files brasero
 %defattr(644,root,root,755)
-#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
-#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
 
 %files evince
 %defattr(644,root,root,755)
-#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
+%endif
 
 %files evolution
 %defattr(644,root,root,755)
@@ -358,9 +367,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/wnck.so
 
+%if 0
 %files mediaprofiles
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/mediaprofiles.so
+%endif
 
 %files print
 %defattr(644,root,root,755)

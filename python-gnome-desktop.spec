@@ -9,7 +9,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.32.0
-Release:	3
+Release:	0.3
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
@@ -298,9 +298,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS
-%dir %{py_sitedir}/gtk-2.0/gnomedesktop
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
-%{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
+#%%dir %{py_sitedir}/gtk-2.0/gnomedesktop
+#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
+#%%{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
 %{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
@@ -320,16 +320,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files applet
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
+#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
 
 %files brasero
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
+#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
+#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
 
 %files evince
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
+#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
 
 %files evolution
 %defattr(644,root,root,755)

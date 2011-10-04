@@ -1,5 +1,5 @@
 #
-# TODO: evince, brasero and mediaprofiles are disabled because these things have
+# NOTE: evince, brasero and mediaprofiles are disabled because these things have
 # been ported to GTK+3. It's not practical to mix GTK+2 and GTK+3 bindings
 # in gnome-python2-desktop, so for now we'll just have to disable the GTK+3
 # stuff.
@@ -14,19 +14,15 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.32.0
-Release:	3
+Release:	4
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
 # Source0-md5:	0e73fa80ace5c861777e0b523c6ead9d
 BuildRequires:	GConf2-devel >= 2.22.0
-#BuildRequires:	brasero-devel >= 2.30.0
 BuildRequires:	bug-buddy >= 2.22.0
-#BuildRequires:	evince-devel >= 2.32.0
 BuildRequires:	evolution-data-server-devel
-BuildRequires:	gnome-desktop-devel >= 2.10.0
-BuildRequires:	gnome-media-devel >= 2.22.0
-BuildRequires:	gnome-panel-devel >= 2.22.0
+BuildRequires:	gnome-desktop2-devel >= 2.10.0
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	gtksourceview-devel >= 1.8.4
@@ -35,7 +31,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.18.1
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libgtop-devel >= 2.22.0
 BuildRequires:	librsvg-devel >= 1:2.22.0
-BuildRequires:	libwnck-devel >= 2.22.0
+BuildRequires:	libwnck2-devel >= 2.22.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
@@ -45,7 +41,14 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 %pyrequires_eq	python-modules
+Obsoletes:	python-gnome-applet
+Obsoletes:	python-gnome-desktop-applet
+Obsoletes:	python-gnome-desktop-brasero
+Obsoletes:	python-gnome-desktop-evince
+Obsoletes:	python-gnome-desktop-mediaprofiles
 Obsoletes:	python-gnome-desktop-nautilus-cd-burner
+Obsoletes:	python-gnome-extras-applet
+Obsoletes:	python-gnome-extras-mediaprofiles
 Obsoletes:	python-gnome-extras-nautilus-cd-burner
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -97,47 +100,6 @@ This package contains example programs for python-gnome-desktop.
 
 %description examples -l pl.UTF-8
 Ten pakiet zawiera przykładowe programy dla python-gnome-desktop.
-
-%package applet
-Summary:	GNOME Applet bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GNOME Applet
-Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
-Requires:	python-gnome-ui >= %{gnome_python_req}
-Requires:	python-pygtk-glade >= %{pygtk_req}
-Provides:	python-gnome-applet
-Obsoletes:	python-gnome-applet
-Obsoletes:	python-gnome-extras-applet
-
-%description applet
-GNOME Applet bindings for Python.
-
-%description applet -l pl.UTF-8
-Wiązania Pythona do biblioteki GNOME Applet.
-
-%if 0
-%package brasero
-Summary:	Brasero bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Brasero
-Group:		Libraries/Python
-
-%description brasero
-Brasero bindings for Python.
-
-%description brasero -l pl.UTF-8
-Wiązania Pythona do bibliotek Brasero.
-
-%package evince
-Summary:	Evince bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Evince
-Group:		Libraries/Python
-
-%description evince
-Evince bindings for Python.
-
-%description evince -l pl.UTF-8
-Wiązania Pythona do bibliotek Evince.
-%endif
 
 %package evolution
 Summary:	Evolution bindings for Python
@@ -218,20 +180,6 @@ Libwnck bindings for Python.
 %description libwnck -l pl.UTF-8
 Wiązania Pythona do biblioteki libwnck.
 
-%package mediaprofiles
-Summary:	gnome-media-profiles bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do gnome-media-profiles
-Group:		Libraries/Python
-Requires:	python-gnome-ui >= %{gnome_python_req}
-Requires:	python-pygtk-glade >= %{pygtk_req}
-Obsoletes:	python-gnome-extras-mediaprofiles
-
-%description mediaprofiles
-gnome-media-profiles bindings for Python.
-
-%description mediaprofiles -l pl.UTF-8
-Wiązania Pythona do gnome-media-profiles.
-
 %package print
 Summary:	GNOME Print bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki GNOME obsługi drukowania
@@ -291,7 +239,7 @@ find $RPM_BUILD_ROOT%{py_sitedir} -name "*.so" -exec chmod +x {} \;
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{{*.la,*.py},*/{*.la,*.py}}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.py,*/*.py}
 
 # wscript doesn't allow to pass proper gtk-doc dir
 if [ ! -d $RPM_BUILD_ROOT%{_gtkdocdir} ]; then
@@ -305,9 +253,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS
-#%%dir %{py_sitedir}/gtk-2.0/gnomedesktop
-#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
-#%%{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
+%dir %{py_sitedir}/gtk-2.0/gnomedesktop
+%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
+%{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
 %{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
@@ -324,21 +272,6 @@ rm -rf $RPM_BUILD_ROOT
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
-
-%files applet
-%defattr(644,root,root,755)
-#%%attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomeapplet.so
-
-%if 0
-%files brasero
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseroburn.so
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/braseromedia.so
-
-%files evince
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/evince.so
-%endif
 
 %files evolution
 %defattr(644,root,root,755)
@@ -366,12 +299,6 @@ rm -rf $RPM_BUILD_ROOT
 %files libwnck
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/wnck.so
-
-%if 0
-%files mediaprofiles
-%defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/mediaprofiles.so
-%endif
 
 %files print
 %defattr(644,root,root,755)

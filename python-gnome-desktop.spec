@@ -14,7 +14,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.32.0
-Release:	4
+Release:	5
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
@@ -216,16 +216,16 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-./waf configure \
+./waf -j1 configure \
 	--prefix %{_prefix} \
 	--libdir %{_libdir}
-./waf -v build
+./waf -j1 -v build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-./waf install \
+./waf -j1 install \
 	--destdir $RPM_BUILD_ROOT
 
 # workaround http://bugzilla.gnome.org/show_bug.cgi?id=555137

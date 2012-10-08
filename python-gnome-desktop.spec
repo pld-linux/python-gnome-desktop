@@ -14,13 +14,14 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.32.0
-Release:	7
+Release:	8
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
 # Source0-md5:	0e73fa80ace5c861777e0b523c6ead9d
 BuildRequires:	GConf2-devel >= 2.22.0
-BuildRequires:	bug-buddy >= 2.22.0
+BuildRequires:	autoconf >= 2.53
+BuildRequires:	automake
 BuildRequires:	evolution-data-server-devel
 BuildRequires:	gnome-desktop2-devel >= 2.10.0
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
@@ -31,6 +32,7 @@ BuildRequires:	libgnomeprintui-devel >= 2.18.1
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libgtop-devel >= 2.22.0
 BuildRequires:	librsvg-devel >= 1:2.22.0
+BuildRequires:	libtool
 BuildRequires:	libwnck2-devel >= 2.22.0
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3.2
@@ -41,10 +43,12 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 %pyrequires_eq	python-modules
+Obsoletes:	python-evolution
 Obsoletes:	python-gnome-applet
 Obsoletes:	python-gnome-desktop-applet
 Obsoletes:	python-gnome-desktop-brasero
 Obsoletes:	python-gnome-desktop-evince
+Obsoletes:	python-gnome-desktop-evolution
 Obsoletes:	python-gnome-desktop-mediaprofiles
 Obsoletes:	python-gnome-desktop-nautilus-cd-burner
 Obsoletes:	python-gnome-extras-applet
@@ -99,22 +103,6 @@ This package contains example programs for python-gnome-desktop.
 
 %description examples -l pl.UTF-8
 Ten pakiet zawiera przykładowe programy dla python-gnome-desktop.
-
-%package evolution
-Summary:	Evolution bindings for Python
-Summary(pl.UTF-8):	Wiązania Pythona do bibliotek Evolution
-Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
-Requires:	python-gnome-ui >= %{gnome_python_req}
-Requires:	python-pygtk-glade >= %{pygtk_req}
-Provides:	python-evolution
-Obsoletes:	python-evolution
-
-%description evolution
-Evolution bindings for Python.
-
-%description evolution -l pl.UTF-8
-Wiązania Pythona do bibliotek Evolution.
 
 %package gtksourceview
 Summary:	Gtksourceview bindings for Python
@@ -215,30 +203,36 @@ Wiązania Pythona do biblioteki totem.
 %setup -q -n %{module}-%{version}
 
 %build
-./waf -j1 configure \
-	--prefix %{_prefix} \
-	--libdir %{_libdir}
-./waf -j1 -v build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--disable-applet \
+	--disable-braseromedia \
+	--disable-braseroburn \
+	--disable-bugbuddy \
+	--disable-evolution \
+	--disable-evolution_ecal \
+	--disable-evince \
+	--disable-mediaprofiles \
+	--disable-nautilusburn
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-./waf -j1 install \
-	--destdir $RPM_BUILD_ROOT
-
-# workaround http://bugzilla.gnome.org/show_bug.cgi?id=555137
-install bugbuddy.py $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/bugbuddy.py
-
-# waf installs modules with wrong permissions
-find $RPM_BUILD_ROOT%{py_sitedir} -name "*.so" -exec chmod +x {} \;
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.py,*/*.py}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.la,*/*.{py,la}}
 
 # wscript doesn't allow to pass proper gtk-doc dir
 if [ ! -d $RPM_BUILD_ROOT%{_gtkdocdir} ]; then
@@ -255,7 +249,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/gtk-2.0/gnomedesktop
 %attr(755,root,root) %{py_sitedir}/gtk-2.0/gnomedesktop/_gnomedesktop.so
 %{py_sitedir}/gtk-2.0/gnomedesktop/__init__.py[co]
-%{py_sitedir}/gtk-2.0/bugbuddy.py[co]
 
 %files devel
 %defattr(644,root,root,755)
@@ -271,13 +264,6 @@ rm -rf $RPM_BUILD_ROOT
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
-
-%files evolution
-%defattr(644,root,root,755)
-%dir %{py_sitedir}/gtk-2.0/evolution
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ebook.so
-%attr(755,root,root) %{py_sitedir}/gtk-2.0/evolution/ecal.so
-%{py_sitedir}/gtk-2.0/evolution/__init__.py[co]
 
 %files gtksourceview
 %defattr(644,root,root,755)

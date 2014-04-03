@@ -6,7 +6,7 @@
 #
 # Conditional builds:
 %bcond_without	totem		# disable totem support
-#
+
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.12.0
 %define		gnome_python_req	2.26.0
@@ -14,7 +14,7 @@ Summary:	GNOME bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do bibliotek GNOME
 Name:		python-gnome-desktop
 Version:	2.32.0
-Release:	9
+Release:	10
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
@@ -42,7 +42,7 @@ BuildRequires:	python-pygtk-devel >= %{pygtk_req}
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
-%pyrequires_eq	python-modules
+Requires:	python-modules
 Obsoletes:	python-evolution
 Obsoletes:	python-gnome-applet
 Obsoletes:	python-gnome-desktop-applet
@@ -85,6 +85,9 @@ Summary:	GNOME bindings for Python API documentation
 Summary(pl.UTF-8):	Dokumentacja API wiązań Pythona do GNOME
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 GNOME bindings for Python API documentation.

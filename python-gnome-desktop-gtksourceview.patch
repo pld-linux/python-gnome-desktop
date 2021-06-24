@@ -1,0 +1,447 @@
+--- gnome-python-desktop-2.32.0/gtksourceview/gtksourceview.override.orig	2010-02-09 13:46:26.000000000 +0100
++++ gnome-python-desktop-2.32.0/gtksourceview/gtksourceview.override	2021-06-23 21:03:06.921893407 +0200
+@@ -8,7 +8,6 @@
+ #include <gtksourceview/gtksourcelanguage.h>
+ #include <gtksourceview/gtksourcelanguagesmanager.h>
+ #include <gtksourceview/gtksourcemarker.h>
+-#include <gtksourceview/gtksourceprintjob.h>
+ #include <gtksourceview/gtksourcestylescheme.h>
+ #include <gtksourceview/gtksourcetag.h>
+ #include <gtksourceview/gtksourcetagstyle.h>
+@@ -62,7 +61,6 @@
+ ignore
+     gtk_source_view_new_with_buffer
+     gtk_source_buffer_new_with_language
+-    gtk_source_print_job_new_with_buffer
+ %%
+ ignore-glob	
+     *_get_type
+@@ -122,36 +120,6 @@
+ %%
+ new-constructor GTK_TYPE_SOURCE_BUFFER
+ %%
+-override gtk_source_print_job_new
+-
+-static int
+-_wrap_gtk_source_print_job_new (PyGObject *self, PyObject *args, PyObject *kwargs)
+-{
+-    static char *kwlist[] = { "config", "buffer", NULL };
+-    PyGObject *config = NULL, *buffer = NULL;
+-    if (!PyArg_ParseTupleAndKeywords (args, kwargs, "|O!O!:GtkSourcePrintJob.__init__", kwlist,
+-            &PyGnomePrintConfig_Type, &config, &PyGtkSourceBuffer_Type, &buffer))
+-        return -1;
+-    
+-    if (config && buffer)
+-        self->obj = (GObject *)gtk_source_print_job_new_with_buffer (
+-            GNOME_PRINT_CONFIG(config->obj), GTK_SOURCE_BUFFER(buffer->obj));
+-    else if (buffer)
+-        self->obj = (GObject *)gtk_source_print_job_new_with_buffer (NULL,
+-            GTK_SOURCE_BUFFER(buffer->obj));
+-    else if (config)
+-        self->obj = (GObject *)gtk_source_print_job_new (GNOME_PRINT_CONFIG(config->obj));
+-    else
+-        self->obj = (GObject *)gtk_source_print_job_new (NULL);
+-    
+-    if (!self->obj) {
+-        PyErr_SetString (PyExc_RuntimeError, "could not create GtkSourcePrintJob object");
+-        return -1;
+-    }
+-    pygobject_register_wrapper ((PyObject *)self);
+-    return 0;
+-}
+-%%
+ override gtk_source_buffer_get_markers_in_region
+ 
+ static PyObject *
+@@ -385,17 +353,6 @@
+     return Py_None;
+ }
+ %%
+-override gtk_source_print_job_get_text_margins
+-
+-static PyObject *
+-_wrap_gtk_source_print_job_get_text_margins (PyGObject *self)
+-{
+-    gdouble top, bottom, left, right;
+-    gtk_source_print_job_get_text_margins (GTK_SOURCE_PRINT_JOB(self->obj),
+-        &top, &bottom, &left, &right);
+-    return Py_BuildValue("(dddd)", top, bottom, left, right);
+-}
+-%%
+ override gtk_source_iter_forward_search_deprecated kwargs
+ static PyObject *
+ _wrap_gtk_source_iter_forward_search_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+--- gnome-python-desktop-2.32.0/gtksourceview/gtksourceview.defs.orig	2010-02-09 13:46:26.000000000 +0100
++++ gnome-python-desktop-2.32.0/gtksourceview/gtksourceview.defs	2021-06-24 16:36:28.057164409 +0200
+@@ -21,13 +21,6 @@
+   (gtype-id "GTK_TYPE_SOURCE_LANGUAGES_MANAGER")
+ )
+ 
+-(define-object SourcePrintJob
+-  (in-module "Gtk")
+-  (parent "GObject")
+-  (c-name "GtkSourcePrintJob")
+-  (gtype-id "GTK_TYPE_SOURCE_PRINT_JOB")
+-)
+-
+ (define-object SourceTag
+   (in-module "Gtk")
+   (parent "GtkTextTag")
+@@ -620,357 +613,6 @@
+ )
+ 
+ 
+-
+-;; From /opt/gnome2/include/gtksourceview-1.0/gtksourceview/gtksourceprintjob.h
+-
+-(define-function gtk_source_print_job_get_type
+-  (c-name "gtk_source_print_job_get_type")
+-  (return-type "GType")
+-)
+-
+-(define-function gtk_source_print_job_new
+-  (c-name "gtk_source_print_job_new")
+-  (is-constructor-of "GtkSourcePrintJob")
+-  (return-type "GtkSourcePrintJob*")
+-  (parameters
+-    '("GnomePrintConfig*" "config" (null-ok) (default "NULL"))
+-  )
+-)
+-
+-(define-function gtk_source_print_job_new_with_buffer
+-  (c-name "gtk_source_print_job_new_with_buffer")
+-  (is-constructor-of "GtkSourcePrintJob")
+-  (return-type "GtkSourcePrintJob*")
+-  (parameters
+-    '("GnomePrintConfig*" "config" (null-ok) (default "NULL"))
+-    '("GtkSourceBuffer*" "buffer")
+-  )
+-)
+-
+-(define-method set_config
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_config")
+-  (return-type "none")
+-  (parameters
+-    '("GnomePrintConfig*" "config")
+-  )
+-)
+-
+-(define-method get_config
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_config")
+-  (return-type "GnomePrintConfig*")
+-)
+-
+-(define-method set_buffer
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_buffer")
+-  (return-type "none")
+-  (parameters
+-    '("GtkSourceBuffer*" "buffer")
+-  )
+-)
+-
+-(define-method get_buffer
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_buffer")
+-  (return-type "GtkSourceBuffer*")
+-)
+-
+-(define-method setup_from_view
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_setup_from_view")
+-  (return-type "none")
+-  (parameters
+-    '("GtkSourceView*" "view")
+-  )
+-)
+-
+-(define-method set_tabs_width
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_tabs_width")
+-  (return-type "none")
+-  (parameters
+-    '("guint" "tabs_width")
+-  )
+-)
+-
+-(define-method get_tabs_width
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_tabs_width")
+-  (return-type "guint")
+-)
+-
+-(define-method set_wrap_mode
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_wrap_mode")
+-  (return-type "none")
+-  (parameters
+-    '("GtkWrapMode" "wrap")
+-  )
+-)
+-
+-(define-method get_wrap_mode
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_wrap_mode")
+-  (return-type "GtkWrapMode")
+-)
+-
+-(define-method set_highlight
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_highlight")
+-  (return-type "none")
+-  (parameters
+-    '("gboolean" "highlight")
+-  )
+-)
+-
+-(define-method get_highlight
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_highlight")
+-  (return-type "gboolean")
+-)
+-
+-(define-method set_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_font")
+-  (return-type "none")
+-  (parameters
+-    '("const-gchar*" "font_name")
+-  )
+-)
+-
+-(define-method get_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_font")
+-  (return-type "gchar*")
+-)
+-
+-(define-method set_numbers_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_numbers_font")
+-  (return-type "none")
+-  (parameters
+-    '("const-gchar*" "font_name" (null-ok))
+-  )
+-)
+-
+-(define-method get_numbers_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_numbers_font")
+-  (return-type "gchar*")
+-)
+-
+-(define-method set_print_numbers
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_print_numbers")
+-  (return-type "none")
+-  (parameters
+-    '("guint" "interval")
+-  )
+-)
+-
+-(define-method get_print_numbers
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_print_numbers")
+-  (return-type "guint")
+-)
+-
+-(define-method set_text_margins
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_text_margins")
+-  (return-type "none")
+-  (parameters
+-    '("gdouble" "top")
+-    '("gdouble" "bottom")
+-    '("gdouble" "left")
+-    '("gdouble" "right")
+-  )
+-)
+-
+-(define-method get_text_margins
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_text_margins")
+-  (return-type "none")
+-  (parameters
+-    '("gdouble*" "top")
+-    '("gdouble*" "bottom")
+-    '("gdouble*" "left")
+-    '("gdouble*" "right")
+-  )
+-)
+-
+-(define-method set_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_font_desc")
+-  (return-type "none")
+-  (parameters
+-    '("PangoFontDescription*" "desc")
+-  )
+-)
+-
+-(define-method get_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_font_desc")
+-  (return-type "PangoFontDescription*")
+-)
+-
+-(define-method set_numbers_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_numbers_font_desc")
+-  (return-type "none")
+-  (parameters
+-    '("PangoFontDescription*" "desc" (null-ok))
+-  )
+-)
+-
+-(define-method get_numbers_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_numbers_font_desc")
+-  (return-type "PangoFontDescription*")
+-)
+-
+-(define-method set_header_footer_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_header_footer_font_desc")
+-  (return-type "none")
+-  (parameters
+-    '("PangoFontDescription*" "desc" (null-ok))
+-  )
+-)
+-
+-(define-method get_header_footer_font_desc
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_header_footer_font_desc")
+-  (return-type "PangoFontDescription*")
+-)
+-
+-(define-method print
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_print")
+-  (return-type "GnomePrintJob*")
+-)
+-
+-(define-method print_range
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_print_range")
+-  (return-type "GnomePrintJob*")
+-  (parameters
+-    '("const-GtkTextIter*" "start")
+-    '("const-GtkTextIter*" "end")
+-  )
+-)
+-
+-(define-method print_range_async
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_print_range_async")
+-  (return-type "gboolean")
+-  (parameters
+-    '("const-GtkTextIter*" "start")
+-    '("const-GtkTextIter*" "end")
+-  )
+-)
+-
+-(define-method cancel
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_cancel")
+-  (return-type "none")
+-)
+-
+-(define-method get_print_job
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_print_job")
+-  (return-type "GnomePrintJob*")
+-)
+-
+-(define-method get_page
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_page")
+-  (return-type "guint")
+-)
+-
+-(define-method get_page_count
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_page_count")
+-  (return-type "guint")
+-)
+-
+-(define-method get_print_context
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_print_context")
+-  (return-type "GnomePrintContext*")
+-)
+-
+-(define-method set_print_header
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_print_header")
+-  (return-type "none")
+-  (parameters
+-    '("gboolean" "setting")
+-  )
+-)
+-
+-(define-method get_print_header
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_print_header")
+-  (return-type "gboolean")
+-)
+-
+-(define-method set_print_footer
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_print_footer")
+-  (return-type "none")
+-  (parameters
+-    '("gboolean" "setting")
+-  )
+-)
+-
+-(define-method get_print_footer
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_print_footer")
+-  (return-type "gboolean")
+-)
+-
+-(define-method set_header_footer_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_header_footer_font")
+-  (return-type "none")
+-  (parameters
+-    '("const-gchar*" "font_name" (null-ok))
+-  )
+-)
+-
+-(define-method get_header_footer_font
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_get_header_footer_font")
+-  (return-type "gchar*")
+-)
+-
+-(define-method set_header_format
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_header_format")
+-  (return-type "none")
+-  (parameters
+-    '("const-gchar*" "left" (null-ok))
+-    '("const-gchar*" "center" (null-ok))
+-    '("const-gchar*" "right" (null-ok))
+-    '("gboolean" "separator")
+-  )
+-)
+-
+-(define-method set_footer_format
+-  (of-object "GtkSourcePrintJob")
+-  (c-name "gtk_source_print_job_set_footer_format")
+-  (return-type "none")
+-  (parameters
+-    '("const-gchar*" "left" (null-ok))
+-    '("const-gchar*" "center" (null-ok))
+-    '("const-gchar*" "right" (null-ok))
+-    '("gboolean" "separator")
+-  )
+-)
+-
+-
+ 
+ ;; From /opt/gnome2/include/gtksourceview-1.0/gtksourceview/gtksourcestylescheme.h
+ 

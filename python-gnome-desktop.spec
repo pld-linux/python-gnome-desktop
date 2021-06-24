@@ -17,12 +17,15 @@ Version:	2.32.0
 Release:	15
 License:	GPL v2/LGPL v2.1 (see COPYING)
 Group:		Libraries/Python
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
+Source0:	https://download.gnome.org/sources/gnome-python-desktop/2.32/%{module}-%{version}.tar.bz2
 # Source0-md5:	0e73fa80ace5c861777e0b523c6ead9d
+Patch0:		%{name}-gtksourceview.patch
+Patch1:		%{name}-ac.patch
+URL:		https://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	autoconf >= 2.53
 BuildRequires:	automake
-BuildRequires:	evolution-data-server-devel
+BuildRequires:	gnome-common
 BuildRequires:	gnome-desktop2-devel >= 2.10.0
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
@@ -39,21 +42,23 @@ BuildRequires:	python-devel >= 1:2.3.2
 BuildRequires:	python-gnome-devel >= %{gnome_python_req}
 BuildRequires:	python-pycairo-devel
 BuildRequires:	python-pygtk-devel >= %{pygtk_req}
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.336
+BuildRequires:	sed >= 4.0
 %{?with_totem:BuildRequires:	totem-pl-parser-devel >= 1.6.0}
 Requires:	python-modules
-Obsoletes:	python-evolution
-Obsoletes:	python-gnome-applet
-Obsoletes:	python-gnome-desktop-applet
-Obsoletes:	python-gnome-desktop-brasero
-Obsoletes:	python-gnome-desktop-evince
-Obsoletes:	python-gnome-desktop-evolution
-Obsoletes:	python-gnome-desktop-mediaprofiles
-Obsoletes:	python-gnome-desktop-nautilus-cd-burner
-Obsoletes:	python-gnome-extras-applet
-Obsoletes:	python-gnome-extras-mediaprofiles
-Obsoletes:	python-gnome-extras-nautilus-cd-burner
+Obsoletes:	python-evolution < 0.1
+Obsoletes:	python-gnome-applet < 2.10.0
+Obsoletes:	python-gnome-desktop-applet < 2.32.0-4
+Obsoletes:	python-gnome-desktop-brasero < 2.32.0-4
+Obsoletes:	python-gnome-desktop-evince < 2.32.0-4
+Obsoletes:	python-gnome-desktop-evolution < 2.32.0-8
+Obsoletes:	python-gnome-desktop-mediaprofiles < 2.32.0-4
+Obsoletes:	python-gnome-desktop-nautilus-cd-burner < 2.30.0-2
+Obsoletes:	python-gnome-extras-applet < 2.14.0
+Obsoletes:	python-gnome-extras-mediaprofiles < 2.14.0
+Obsoletes:	python-gnome-extras-nautilus-cd-burner < 2.14.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define pydefsdir %(pkg-config --variable=defsdir pygtk-2.0)
@@ -110,7 +115,7 @@ Summary:	Gtksourceview bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki gtksourceview
 Group:		Libraries/Python
 Requires:	%{name}-print = %{version}-%{release}
-Obsoletes:	python-gnome-extras-gtksourceview
+Obsoletes:	python-gnome-extras-gtksourceview < 2.14.0
 
 %description gtksourceview
 Gtksourceview bindings for Python.
@@ -135,7 +140,7 @@ Summary:	Libgtop bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libgtop
 Group:		Libraries/Python
 Requires:	python-pygobject >= 2.14.0
-Obsoletes:	python-gnome-extras-libgtop
+Obsoletes:	python-gnome-extras-libgtop < 2.14.0
 
 %description libgtop
 Libgtop bindings for Python.
@@ -160,7 +165,7 @@ Summary:	Libwnck bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki libwnck
 Group:		Libraries/Python
 Requires:	python-pygtk-gtk >= %{pygtk_req}
-Obsoletes:	python-gnome-extras-libwnck
+Obsoletes:	python-gnome-extras-libwnck < 2.14.0
 
 %description libwnck
 Libwnck bindings for Python.
@@ -176,9 +181,9 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	python-gnome-canvas >= %{gnome_python_req}
 Provides:	python-gnome-print
 Provides:	python-gnome-print-ui
-Obsoletes:	python-gnome-extras-print
-Obsoletes:	python-gnome-print
-Obsoletes:	python-gnome-print-ui
+Obsoletes:	python-gnome-extras-print < 2.14.0
+Obsoletes:	python-gnome-print < 2.10.0
+Obsoletes:	python-gnome-print-ui < 2.10.0
 
 %description print
 GNOME Print bindings for Python.
@@ -192,7 +197,7 @@ Summary(pl.UTF-8):	Wiązania Pythona do biblioteki totem
 Group:		Libraries/Python
 Requires:	python-gnome-vfs >= %{gnome_python_req}
 Requires:	python-pygtk-gtk >= %{pygtk_req}
-Obsoletes:	python-gnome-extras-totem
+Obsoletes:	python-gnome-extras-totem < 2.14.0
 
 %description totem
 Totem bindings for Python.
@@ -202,6 +207,14 @@ Wiązania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
+%patch1 -p1
+
+%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
+	examples/keyring.py \
+	examples/applet/applet.py \
+	examples/gnomeprint/{example_*,test-print}.py \
+	examples/mediaprofiles/profiles.py
 
 %build
 %{__libtoolize}
@@ -219,6 +232,7 @@ Wiązania Pythona do biblioteki totem.
 	--disable-evince \
 	--disable-mediaprofiles \
 	--disable-nautilusburn
+
 %{__make}
 
 %install
@@ -226,20 +240,16 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	HTML_DIR=%{_gtkdocdir}
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0
+%py_postclean
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.la,*/*.{py,la}}
-
-# wscript doesn't allow to pass proper gtk-doc dir
-if [ ! -d $RPM_BUILD_ROOT%{_gtkdocdir} ]; then
-	install -d $RPM_BUILD_ROOT%{_gtkdocdir}
-	mv $RPM_BUILD_ROOT%{_datadir}/gtk-doc/html/* $RPM_BUILD_ROOT%{_gtkdocdir}
-fi
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/gtk-2.0/{*.la,*/*.la}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -253,7 +263,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{pydefsdir}/*.defs
+%{pydefsdir}/_gnomedesktop.defs
+%{pydefsdir}/art.defs
+%{pydefsdir}/gnomekeyring.defs
+%{pydefsdir}/gtksourceview.defs
+%{pydefsdir}/print.defs
+%{pydefsdir}/printui.defs
+%{pydefsdir}/wnck.defs
 %{_pkgconfigdir}/gnome-python-desktop-2.0.pc
 
 %files apidocs

@@ -5,7 +5,7 @@
 # stuff.
 #
 # Conditional builds:
-%bcond_without	totem		# disable totem support
+%bcond_without	totem		# totem-plparser support
 
 %define		module			gnome-python-desktop
 %define		pygtk_req		2:2.12.0
@@ -195,7 +195,9 @@ Wiązania Pythona do biblioteki GNOME obsługi drukowania.
 Summary:	Totem bindings for Python
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki totem
 Group:		Libraries/Python
+# imported in plparsermodule.c
 Requires:	python-gnome-vfs >= %{gnome_python_req}
+# pygtk is redundant here? (pygobject should be enough, but pygtk/pygdk is used in build and gtk linked in)
 Requires:	python-pygtk-gtk >= %{pygtk_req}
 Obsoletes:	python-gnome-extras-totem < 2.14.0
 

@@ -55,6 +55,7 @@ Obsoletes:	python-gnome-desktop-brasero < 2.32.0-4
 Obsoletes:	python-gnome-desktop-evince < 2.32.0-4
 Obsoletes:	python-gnome-desktop-evolution < 2.32.0-8
 Obsoletes:	python-gnome-desktop-mediaprofiles < 2.32.0-4
+Obsoletes:	python-gnome-desktop-metacity < 2.22.0
 Obsoletes:	python-gnome-desktop-nautilus-cd-burner < 2.30.0-2
 Obsoletes:	python-gnome-extras-applet < 2.14.0
 Obsoletes:	python-gnome-extras-mediaprofiles < 2.14.0

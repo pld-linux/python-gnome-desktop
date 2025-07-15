@@ -210,8 +210,8 @@ Wiązania Pythona do biblioteki totem.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
 	examples/keyring.py \
